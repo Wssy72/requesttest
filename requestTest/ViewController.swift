@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -30,15 +28,49 @@ class ViewController: UIViewController {
             
             if let data = data {
                 print(data)
+                //let jsonDecoder = JSONDecoder()
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
+                   // let json = try JSONSerialization.jsonObject as? [String: Any]
+                  //  print(json)
+                    
+                    let product: User = try! JSONDecoder().decode(User.self, from: data)
+                   print(product)
                 } catch {
                     print(error)
                 }
             }
-
         }
     .resume()
+        
     }
 }
+
+struct User: Decodable {
+    let id: Int
+    let email: String
+    let first_name: String
+    let last_name: String
+    let avatar: URL
+    // name for protocol
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case first_name
+        case last_name
+        case avatar
+    }
+    public struct Response {
+        let data: [User]
+        
+        init(data: [User]) {
+            self.data = data
+        }
+    }
+    extension Response: Decodable {
+        enum ResponseKeys: String, CodingKey {
+            case data
+        }
+    }
+         
+}
+
