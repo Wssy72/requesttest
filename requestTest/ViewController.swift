@@ -28,13 +28,9 @@ class ViewController: UIViewController {
             
             if let data = data {
                 print(data)
-                //let jsonDecoder = JSONDecoder()
                 do {
-                   // let json = try JSONSerialization.jsonObject as? [String: Any]
-                  //  print(json)
-                    
-                    let product: User = try! JSONDecoder().decode(User.self, from: data)
-                   print(product)
+                    let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
+                   print(answer)
                 } catch {
                     print(error)
                 }
@@ -44,33 +40,51 @@ class ViewController: UIViewController {
         
     }
 }
-
 struct User: Decodable {
-    let id: Int
-    let email: String
-    let first_name: String
-    let last_name: String
-    let avatar: URL
-    // name for protocol
-    enum CodingKeys: String, CodingKey {
+   let id: Int
+   let email: String
+   let firstName: String
+   let lastName: String
+   let avatar: URL
+    
+enum CodingKeys: String, CodingKey {
         case id
         case email
-        case first_name
-        case last_name
+        case firstName = "first_name"
+        case lastName = "last_name"
         case avatar
     }
-    public struct Response {
-        let data: [User]
-        
-        init(data: [User]) {
-            self.data = data
-        }
-    }
-    extension Response: Decodable {
-        enum ResponseKeys: String, CodingKey {
-            case data
-        }
-    }
-         
 }
+struct ServerAnswer: Decodable {
+let data: [User]
+}
+
+//struct ServerAnswer: Decodable {
+//    let id: Int
+//    let email: String
+//    let first_name: String
+ //   let last_name: String
+//    let avatar: URL
+    // name for protocol
+ //   enum CodingKeys: String, CodingKey {
+  //      case id
+  //      case email
+  //      case first_name
+  //      case last_name
+  //      case avatar
+   // }
+   // public struct Response {
+   //     let data: [ServerAnswer]
+        
+   //     init(data: [ServerAnswer]) {
+    //        self.data = data
+    //    }
+    //}
+    // extension Response: Decodable {
+        //enum ResponseKeys: String, CodingKey {
+        //    case data
+      //  }
+    //}
+         
+//}
 
