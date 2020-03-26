@@ -8,17 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var dataDecode: [ServerAnswer] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         oneRequest()
+        
     }
-    
     func oneRequest () {
         let url = URL(string: "https://reqres.in/api/users?page=2")!
-        //var request = URLRequest(url: url)
         let session = URLSession.shared
         
         let task = session.dataTask(with: url) {(data, response, error) in
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
                 print(data)
                 do {
                     let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
+                    self.dataDecode.append(answer)
                    print(answer)
                 } catch {
                     print(error)
@@ -39,22 +41,17 @@ class ViewController: UIViewController {
     .resume()
         
     }
-}
-struct User: Decodable {
-   let id: Int
-   let email: String
-   let firstName: String
-   let lastName: String
-   let avatar: URL
     
-enum CodingKeys: String, CodingKey {
-        case id
-        case email
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case avatar
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+       }
+       
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           <#code#>
+       }
+    
 }
+
 struct ServerAnswer: Decodable {
 let data: [User]
 }
