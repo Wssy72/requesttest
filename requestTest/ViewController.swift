@@ -10,13 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var dataDecode: [ServerAnswer] = []
+    var dataDecode = [User]()
+    var myTableView: UITableView! = UITableView()
+    let registerCell = "registerCells"
+    var  numberLabel: UILabel! = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         oneRequest()
-        
+        myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "registerCell")
     }
     func oneRequest () {
         let url = URL(string: "https://reqres.in/api/users?page=2")!
@@ -31,7 +35,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print(data)
                 do {
                     let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
-                    self.dataDecode.append(answer)
+                    let answerData = answer.data
+                    self.dataDecode.append(answerData)
+                    
                    print(answer)
                 } catch {
                     print(error)
@@ -43,13 +49,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+       return dataDecode.count
        }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           <#code#>
+       let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath)
+        cell.textLabel?.text = dataDecode[indexPath]
+        return cell
        }
-    
 }
 
 struct ServerAnswer: Decodable {
