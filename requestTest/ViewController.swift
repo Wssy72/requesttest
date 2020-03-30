@@ -65,32 +65,3 @@ struct ServerAnswer: Decodable {
 let data: [User]
 }
 
-//struct ServerAnswer: Decodable {
-//    let id: Int
-//    let email: String
-//    let first_name: String
- //   let last_name: String
-//    let avatar: URL
-    // name for protocol
- //   enum CodingKeys: String, CodingKey {
-  //      case id
-  //      case email
-  //      case first_name
-  //      case last_name
-  //      case avatar
-   // }
-   // public struct Response {
-   //     let data: [ServerAnswer]
-        
-   //     init(data: [ServerAnswer]) {
-    //        self.data = data
-    //    }
-    //}
-    // extension Response: Decodable {
-        //enum ResponseKeys: String, CodingKey {
-        //    case data
-      //  }
-    //}
-         
-//}
-
