@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var dataDecode = [User]()
     var myTableView: UITableView! = UITableView()
     let registerCell = "registerCells"
-    var  numberLabel: UILabel! = UILabel()
+    var numberLabel: UILabel! = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,22 +21,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         oneRequest()
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "registerCell")
+        view.backgroundColor = .white
+        self.myTableView.dataSource = self
+        self.myTableView.delegate = self
+        view.addSubview(myTableView)
+        self.myTableView.reloadData()
     }
     func oneRequest () {
         let url = URL(string: "https://reqres.in/api/users?page=2")!
         let session = URLSession.shared
-        
         let task = session.dataTask(with: url) {(data, response, error) in
             if let response = response {
                 print(response)
             }
-            
             if let data = data {
                 print(data)
                 do {
                     let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
                     let answerData = answer.data
-                    self.dataDecode.append(answerData)
+                    self.dataDecode.append(contentsOf: answerData)
                     
                    print(answer)
                 } catch {
@@ -45,17 +48,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     .resume()
-        
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return dataDecode.count
        }
-       
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath)
-        cell.textLabel?.text = dataDecode[indexPath]
-        return cell
+       let userNumber = indexPath.row
+       let user = dataDecode[userNumber]
+       cell.textLabel?.text = user.firstName
+       return cell
        }
 }
 
