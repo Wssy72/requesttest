@@ -23,9 +23,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: registerCell)
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        myTableView.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
+        //let displayWidth: CGFloat = self.view.frame.width
+        //let displayHeight: CGFloat = self.view.frame.height
+        //myTableView.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
         view.backgroundColor = .white
         
         self.myTableView.dataSource = self
@@ -43,7 +43,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
         //print("\(dataDecode[userNumber])")
-        cell.textLabel?.text = dataDecode[userNumber].avatar // user.firstName
+        cell.textLabel?.text = dataDecode[userNumber].firstName
+        // user.firstName
         return cell
     }
     
