@@ -44,7 +44,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let user = dataDecode[userNumber]
         //print("\(dataDecode[userNumber])")
         cell.textLabel?.text = dataDecode[userNumber].firstName
-        // user.firstName
         return cell
     }
     
