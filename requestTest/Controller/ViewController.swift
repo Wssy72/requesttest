@@ -22,16 +22,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         oneRequest()
         
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: registerCell)
-        //let displayWidth: CGFloat = self.view.frame.width
-        //let displayHeight: CGFloat = self.view.frame.height
-        //myTableView.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
+       myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
+        
         view.backgroundColor = .white
         
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,11 +36,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
         //print("\(dataDecode[userNumber])")
-        cell.textLabel?.text = dataDecode[userNumber].firstName
+        cell.textLabel?.text = user.firstName
+        //cell.lastNameTable?.text = 
         return cell
     }
     
