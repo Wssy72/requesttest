@@ -12,10 +12,10 @@ import UIKit
 class MyTableViewCell: UITableViewCell {
 
 var id: UILabel! = UILabel()
-let email: UILabel! = UILabel()
-let firstName: UILabel! = UILabel()
+var email: UILabel! = UILabel()
+var firstNameTable: UILabel! = UILabel()
 var lastNameTable: UILabel! = UILabel()
-let avatar: UILabel! = UILabel()
+var avatar: UILabel! = UILabel()
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -23,9 +23,9 @@ let avatar: UILabel! = UILabel()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    let gap: CGFloat = 10
-    let labelHeight: CGFloat = 20
-    let labelWidth: CGFloat = 80
+    let gap: CGFloat = 20
+    let labelHeight: CGFloat = 30
+    let labelWidth: CGFloat = 150
     
     lastNameTable = UILabel(frame: .init(x: gap, y: gap, width: labelWidth, height: labelHeight))
     contentView.addSubview(lastNameTable)

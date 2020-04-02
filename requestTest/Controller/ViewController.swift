@@ -19,8 +19,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        oneRequest()
-        
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
        myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
@@ -29,6 +27,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
+        
+        oneRequest()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,9 +40,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
-        //print("\(dataDecode[userNumber])")
-        cell.textLabel?.text = user.firstName
-        //cell.lastNameTable?.text = 
+        //cell.textLabel?.text = "Test"
+        
+        cell.lastNameTable.text = user.firstName
+        //"\(user.lastName)"
         return cell
     }
     
@@ -58,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
                     let answerData = answer.data
                     self.dataDecode.append(contentsOf: answerData)
-                    
+                    self.myTableView.reloadData()
                     print(answer)
                 } catch {
                     print(error)
