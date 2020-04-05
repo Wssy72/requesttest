@@ -23,16 +23,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
        myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
         view.backgroundColor = .white
-        
+        myTableView.rowHeight = 80
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
-        
+        print("tableview на экране")
         oneRequest()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("tableview спросил, сколько у нас будет ячеек, смотрим:", dataDecode.count)
         return dataDecode.count
     }
     
@@ -40,17 +40,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
-        //cell.textLabel?.text = "Test"
+        cell.firstNameTable.text = user.firstName
+        cell.lastNameTable.text = user.lastName
+        let dataUrl = try? Data(contentsOf: user.avatar)
+        cell.avatarTable.image = UIImage(data: dataUrl!)
         
-        cell.lastNameTable.text = user.firstName
-        //"\(user.lastName)"
         return cell
+        
     }
     
     func oneRequest () {
+        print("создаем запрос")
         let url = URL(string: "https://reqres.in/api/users?page=2")!
         let session = URLSession.shared
         let task = session.dataTask(with: url) {(data, response, error) in
+            print("запрос получен")
             if let response = response {
                 print(response)
             }
@@ -60,7 +64,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let answer: ServerAnswer = try! JSONDecoder().decode(ServerAnswer.self, from: data)
                     let answerData = answer.data
                     self.dataDecode.append(contentsOf: answerData)
-                    self.myTableView.reloadData()
+                    DispatchQueue.main.async {
+                        print("просим tableview перезагрузить данные")
+                        self.myTableView.reloadData()
+                    }
                     print(answer)
                 } catch {
                     print(error)
@@ -68,9 +75,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         .resume()
-        print("request completed")
+        print("запрос отправлен")
     }
-    
 }
 
 struct ServerAnswer: Decodable {
