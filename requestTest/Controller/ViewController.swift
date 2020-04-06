@@ -31,9 +31,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         oneRequest()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("tableview спросил, сколько у нас будет ячеек, смотрим:", dataDecode.count)
@@ -48,11 +46,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.firstNameTable.text = user.firstName
         cell.lastNameTable.text = user.lastName
         let dataUrl = try? Data(contentsOf: user.avatar)
-        //cell.avatarTable.image = UIImage(data: dataUrl!)
-        cell.email.text = user.email
+        cell.avatarTable.image = UIImage(data: dataUrl!)
+        //cell.email.text = user.email
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+           return UITableView.automaticDimension
+       }
     
     func oneRequest () {
         print("создаем запрос")
