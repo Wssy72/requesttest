@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.firstNameTable.text = user.firstName
         cell.lastNameTable.text = user.lastName
         let dataUrl = try? Data(contentsOf: user.avatar)
-        cell.avatarTable.image = UIImage(data: dataUrl!)
+        //cell.avatarTable.image = UIImage(data: dataUrl!)
         cell.email.text = user.email
         return cell
         

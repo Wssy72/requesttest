@@ -54,6 +54,7 @@ var email: UILabel! = UILabel()
     func constraintInit() {
         NSLayoutConstraint.activate(
             [
+            id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //firstNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //firstNameTable.bottomAnchor.constraint(equalTo: avatarTable.topAnchor, constant: 10),
             //firstNameTable.rightAnchor.constraint(equalTo: lastNameTable.leftAnchor, constant: 10),
