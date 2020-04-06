@@ -23,12 +23,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
        myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
         view.backgroundColor = .white
-        myTableView.rowHeight = 80
+        //myTableView.rowHeight = 80
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
         print("tableview на экране")
         oneRequest()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,11 +44,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
+        cell.id.text = String(user.id)
         cell.firstNameTable.text = user.firstName
         cell.lastNameTable.text = user.lastName
         let dataUrl = try? Data(contentsOf: user.avatar)
         cell.avatarTable.image = UIImage(data: dataUrl!)
-        
+        cell.email.text = user.email
         return cell
         
     }
