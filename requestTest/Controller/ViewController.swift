@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         view.backgroundColor = .white
         myTableView.rowHeight = UITableView.automaticDimension
+        myTableView.estimatedRowHeight = 44.0
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
@@ -40,7 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
-        //cell.id.text = String(user.id)
+        cell.id.text = String(user.id)
         //cell.firstNameTable.text = user.firstName
         //cell.lastNameTable.text = user.lastName
         

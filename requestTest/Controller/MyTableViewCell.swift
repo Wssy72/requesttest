@@ -38,12 +38,12 @@ var email: UILabel! = UILabel()
     
     avatarTable.frame = CGRect(x: 10, y: 20, width: 50, height: 50)
     avatarTable.translatesAutoresizingMaskIntoConstraints = false
-    avatarTable.clipsToBounds = false 
+    avatarTable.clipsToBounds = false
     
     email = UILabel(frame: .init(x: gap, y: gap, width: labelWidth, height: labelHeight))
     email.translatesAutoresizingMaskIntoConstraints = false
         
-    //contentView.addSubview(id)
+    contentView.addSubview(id)
     //contentView.addSubview(firstNameTable)
     //contentView.addSubview(lastNameTable)
     contentView.addSubview(avatarTable)
@@ -54,10 +54,10 @@ var email: UILabel! = UILabel()
     func constraintInit() {
         NSLayoutConstraint.activate(
             [
-            //id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            //id.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            id.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
             
-            //firstNameTable.leftAnchor.constraint(equalTo: id.rightAnchor, constant: 10),
+            firstNameTable.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
             //firstNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //lastNameTable.leftAnchor.constraint (equalTo: firstNameTable.rightAnchor, constant: 10),
             //lastNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
@@ -65,11 +65,10 @@ var email: UILabel! = UILabel()
                 
             avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
-            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
+            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            avatarTable.heightAnchor.constraint(equalToConstant: 50),
-            avatarTable.widthAnchor.constraint(equalToConstant: 50)
+            //avatarTable.heightAnchor.constraint(equalToConstant: 80),
+            //avatarTable.widthAnchor.constraint(equalToConstant: 80)
             
             ])
     }
