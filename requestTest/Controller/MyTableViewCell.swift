@@ -30,8 +30,7 @@ var email: UILabel! = UILabel()
         
     avatarTable.frame = CGRect(x: 20, y: 30, width: 120, height: 120)
     avatarTable.translatesAutoresizingMaskIntoConstraints = false
-    avatarTable.clipsToBounds = false
-        
+    //avatarTable.clipsToBounds = false
     idName = UILabel(frame: .init(x: 0, y: 0, width: labelWidth, height: labelHeight))
     idName.translatesAutoresizingMaskIntoConstraints = false
         
@@ -58,10 +57,14 @@ var email: UILabel! = UILabel()
     }
     func constraintInit() {
         NSLayoutConstraint.activate(
-            [avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            //avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
+            [
+            avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
             
+            avatarTable.heightAnchor.constraint(equalToConstant: 85),
+            avatarTable.widthAnchor.constraint(equalToConstant: 85),
+                
+            //avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             //idName.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //idName.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
             
@@ -75,8 +78,6 @@ var email: UILabel! = UILabel()
              //lastNameTable.leftAnchor.constraint (equalTo: firstNameTable.rightAnchor, constant: 10),
             //lastNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //lastNameTable.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            //avatarTable.heightAnchor.constraint(equalToConstant: 80),
-            //avatarTable.widthAnchor.constraint(equalToConstant: 80)
             
             ])
     }

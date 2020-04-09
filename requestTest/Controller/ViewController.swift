@@ -23,9 +23,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
         myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
-        view.backgroundColor = .white
+        
         myTableView.rowHeight = UITableView.automaticDimension
-        //myTableView.estimatedRowHeight = 120.0
+        myTableView.estimatedRowHeight = 100.0
+        myTableView.beginUpdates()
+        myTableView.endUpdates()
+        view.backgroundColor = .white
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
@@ -43,10 +46,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
         
-        //let urlImage = user.avatar
-        //let url = URL(string: "\(urlImage)")
-        //cell.avatarTable.kf.setImage(with: url)
-        
         cell.idName.text = "id:"
         cell.id.text = String(user.id)
         cell.firstNameTable.text = user.firstName
@@ -59,14 +58,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.avatarTable.image = UIImage(data: dataUrl!)
         }
         }
-        
+        //let urlImage = user.avatar
+        //let url = URL(string: "\(urlImage)")
+        //cell.avatarTable.kf.setImage(with: url)
         return cell
-        
     }
     
-    //func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> //CGFloat {
-        //   return UITableView.automaticDimension
-       //}
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        myTableView.beginUpdates()
+        myTableView.endUpdates()
+           return UITableView.automaticDimension
+       }
     
     func oneRequest () {
         print("создаем запрос")
