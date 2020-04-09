@@ -21,11 +21,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
-       myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
+        myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
         view.backgroundColor = .white
         myTableView.rowHeight = UITableView.automaticDimension
-        myTableView.estimatedRowHeight = 44.0
+        myTableView.estimatedRowHeight = 120.0
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
@@ -47,17 +47,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let url = URL(string: "\(urlImage)")
         cell.avatarTable.kf.setImage(with: url)
         
+        cell.idName.text = "id:"
+        cell.id.text = String(user.id)
+        cell.firstNameTable.text = user.firstName
+        //cell.lastNameTable.text = user.lastName
+        //cell.email.text = user.email
         //DispatchQueue.global().async {
         //let dataUrl = try? Data(contentsOf: user.avatar)
         //    DispatchQueue.main.async {
         //cell.avatarTable.image = UIImage(data: dataUrl!)
         //}
         //}
-        cell.idName.text = "id:"
-        cell.id.text = String(user.id)
-        cell.firstNameTable.text = user.firstName
-        //cell.lastNameTable.text = user.lastName
-        //cell.email.text = user.email
         
         return cell
         
