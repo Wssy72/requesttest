@@ -28,7 +28,7 @@ var email: UILabel! = UILabel()
     let labelHeight: CGFloat = 20
     let labelWidth: CGFloat = 80
         
-    avatarTable.frame = CGRect(x: 10, y: 20, width: 50, height: 50)
+    avatarTable.frame = CGRect(x: 20, y: 30, width: 120, height: 120)
     avatarTable.translatesAutoresizingMaskIntoConstraints = false
     avatarTable.clipsToBounds = false
         
@@ -48,9 +48,9 @@ var email: UILabel! = UILabel()
     email.translatesAutoresizingMaskIntoConstraints = false
     
     contentView.addSubview(avatarTable)
-    contentView.addSubview(idName)
-    contentView.addSubview(id)
-    contentView.addSubview(firstNameTable)
+    //contentView.addSubview(idName)
+    //contentView.addSubview(id)
+    //contentView.addSubview(firstNameTable)
     //contentView.addSubview(lastNameTable)
     //contentView.addSubview(email)
     
@@ -60,22 +60,21 @@ var email: UILabel! = UILabel()
         NSLayoutConstraint.activate(
             [avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            //avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
             
-            idName.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            idName.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
+            //idName.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            //idName.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
             
-            id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            id.leftAnchor.constraint(equalTo: idName.rightAnchor, constant: 10),
+            //id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            //id.leftAnchor.constraint(equalTo: idName.rightAnchor, constant: 10),
             
-            firstNameTable.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
-            firstNameTable.topAnchor.constraint (equalTo: id.bottomAnchor, constant: 10),
-            //lastNameTable.leftAnchor.constraint (equalTo: firstNameTable.rightAnchor, constant: 10),
+            //firstNameTable.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
+            //firstNameTable.topAnchor.constraint (equalTo: id.bottomAnchor, constant: 10),
+            
+            
+             //lastNameTable.leftAnchor.constraint (equalTo: firstNameTable.rightAnchor, constant: 10),
             //lastNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //lastNameTable.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-                
-            
-            
             //avatarTable.heightAnchor.constraint(equalToConstant: 80),
             //avatarTable.widthAnchor.constraint(equalToConstant: 80)
             

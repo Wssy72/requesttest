@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         view.backgroundColor = .white
         myTableView.rowHeight = UITableView.automaticDimension
-        myTableView.estimatedRowHeight = 120.0
+        //myTableView.estimatedRowHeight = 120.0
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
         view.addSubview(myTableView)
@@ -43,21 +43,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
         
-        let urlImage = user.avatar
-        let url = URL(string: "\(urlImage)")
-        cell.avatarTable.kf.setImage(with: url)
+        //let urlImage = user.avatar
+        //let url = URL(string: "\(urlImage)")
+        //cell.avatarTable.kf.setImage(with: url)
         
         cell.idName.text = "id:"
         cell.id.text = String(user.id)
         cell.firstNameTable.text = user.firstName
         //cell.lastNameTable.text = user.lastName
         //cell.email.text = user.email
-        //DispatchQueue.global().async {
-        //let dataUrl = try? Data(contentsOf: user.avatar)
-        //    DispatchQueue.main.async {
-        //cell.avatarTable.image = UIImage(data: dataUrl!)
-        //}
-        //}
+        
+        DispatchQueue.global().async {
+        let dataUrl = try? Data(contentsOf: user.avatar)
+            DispatchQueue.main.async {
+        cell.avatarTable.image = UIImage(data: dataUrl!)
+        }
+        }
         
         return cell
         
