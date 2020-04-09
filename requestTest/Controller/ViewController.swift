@@ -39,22 +39,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
         
-        DispatchQueue.global().async {
-        let dataUrl = try? Data(contentsOf: user.avatar)
-            DispatchQueue.global().async {
-        cell.avatarTable.image = UIImage(data: dataUrl!)
-        }
-        }
+        let urlImage = user.avatar
+        let url = URL(string: "\(urlImage)")
+        cell.avatarTable.kf.setImage(with: url)
+        
+        //DispatchQueue.global().async {
+        //let dataUrl = try? Data(contentsOf: user.avatar)
+        //    DispatchQueue.main.async {
+        //cell.avatarTable.image = UIImage(data: dataUrl!)
+        //}
+        //}
         cell.idName.text = "id:"
         cell.id.text = String(user.id)
         cell.firstNameTable.text = user.firstName
         //cell.lastNameTable.text = user.lastName
         //cell.email.text = user.email
-        //DispatchQueue.global().async {
         
         return cell
         
