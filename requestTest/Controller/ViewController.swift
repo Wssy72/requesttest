@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,13 +42,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: registerCell, for: indexPath) as! MyTableViewCell
         let userNumber = indexPath.row
         let user = dataDecode[userNumber]
-        cell.id.text = String(user.id)
-        //cell.firstNameTable.text = user.firstName
-        //cell.lastNameTable.text = user.lastName
         
+        DispatchQueue.global().async {
         let dataUrl = try? Data(contentsOf: user.avatar)
+            DispatchQueue.global().async {
         cell.avatarTable.image = UIImage(data: dataUrl!)
+        }
+        }
+        cell.idName.text = "id:"
+        cell.id.text = String(user.id)
+        cell.firstNameTable.text = user.firstName
+        //cell.lastNameTable.text = user.lastName
         //cell.email.text = user.email
+        //DispatchQueue.global().async {
+        
         return cell
         
     }

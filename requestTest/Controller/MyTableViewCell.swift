@@ -11,10 +11,11 @@ import UIKit
 
 class MyTableViewCell: UITableViewCell {
 
+var avatarTable: UIImageView! = UIImageView()
 var id: UILabel! = UILabel()
+var idName: UILabel! = UILabel()
 var firstNameTable: UILabel! = UILabel()
 var lastNameTable: UILabel! = UILabel()
-var avatarTable: UIImageView! = UIImageView()
 var email: UILabel! = UILabel()
 
     required init?(coder: NSCoder) {
@@ -27,45 +28,53 @@ var email: UILabel! = UILabel()
     let labelHeight: CGFloat = 20
     let labelWidth: CGFloat = 80
         
+    avatarTable.frame = CGRect(x: 10, y: 20, width: 50, height: 50)
+    avatarTable.translatesAutoresizingMaskIntoConstraints = false
+    avatarTable.clipsToBounds = false
+        
+    idName = UILabel(frame: .init(x: 0, y: 0, width: labelWidth, height: labelHeight))
+    idName.translatesAutoresizingMaskIntoConstraints = false
+        
     id = UILabel(frame: .init(x: gap, y: gap, width: labelWidth, height: labelHeight))
     id.translatesAutoresizingMaskIntoConstraints = false
         
-    firstNameTable = UILabel(frame: .init(x: 50, y: gap, width: labelWidth, height: labelHeight))
+    firstNameTable = UILabel(frame: .init(x: 0, y: 0, width: labelWidth, height: labelHeight))
     firstNameTable.translatesAutoresizingMaskIntoConstraints = false
         
     lastNameTable = UILabel(frame: .init(x: gap * 5, y: gap, width: labelWidth, height: labelHeight))
     lastNameTable.translatesAutoresizingMaskIntoConstraints = false
     
-    avatarTable.frame = CGRect(x: 10, y: 20, width: 50, height: 50)
-    avatarTable.translatesAutoresizingMaskIntoConstraints = false
-    avatarTable.clipsToBounds = false
-    
     email = UILabel(frame: .init(x: gap, y: gap, width: labelWidth, height: labelHeight))
     email.translatesAutoresizingMaskIntoConstraints = false
-        
-    contentView.addSubview(id)
-    //contentView.addSubview(firstNameTable)
-    //contentView.addSubview(lastNameTable)
+    
     contentView.addSubview(avatarTable)
+    contentView.addSubview(idName)
+    contentView.addSubview(id)
+    contentView.addSubview(firstNameTable)
+    //contentView.addSubview(lastNameTable)
     //contentView.addSubview(email)
     
     constraintInit()
     }
     func constraintInit() {
         NSLayoutConstraint.activate(
-            [
+            [avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            idName.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            idName.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
+            
             id.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            id.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
+            id.leftAnchor.constraint(equalTo: idName.rightAnchor, constant: 10),
             
             firstNameTable.leftAnchor.constraint(equalTo: avatarTable.rightAnchor, constant: 10),
-            //firstNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
+            firstNameTable.topAnchor.constraint (equalTo: id.bottomAnchor, constant: 10),
             //lastNameTable.leftAnchor.constraint (equalTo: firstNameTable.rightAnchor, constant: 10),
             //lastNameTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
             //lastNameTable.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
                 
-            avatarTable.topAnchor.constraint (equalTo: contentView.topAnchor, constant: 10),
-            avatarTable.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            avatarTable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
             
             //avatarTable.heightAnchor.constraint(equalToConstant: 80),
             //avatarTable.widthAnchor.constraint(equalToConstant: 80)
