@@ -23,11 +23,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView = UITableView.init(frame: view.bounds, style: UITableView.Style.grouped)
         myTableView.register(MyTableViewCell.self, forCellReuseIdentifier: registerCell)
         
+        //myTableView.rowHeight = UITableView.automaticDimension
+        //myTableView.estimatedRowHeight = 44
         
-        myTableView.rowHeight = UITableView.automaticDimension
-        myTableView.estimatedRowHeight = 100.0
-        myTableView.beginUpdates()
-        myTableView.endUpdates()
         view.backgroundColor = .white
         self.myTableView.dataSource = self
         self.myTableView.delegate = self
@@ -49,25 +47,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.idName.text = "id:"
         cell.id.text = String(user.id)
         cell.firstNameTable.text = user.firstName
-        //cell.lastNameTable.text = user.lastName
-        //cell.email.text = user.email
+        cell.lastNameTable.text = user.lastName
+        cell.email.text = user.email
         
-        DispatchQueue.global().async {
-        let dataUrl = try? Data(contentsOf: user.avatar)
-            DispatchQueue.main.async {
-        cell.avatarTable.image = UIImage(data: dataUrl!)
-        }
-        }
-        //let urlImage = user.avatar
-        //let url = URL(string: "\(urlImage)")
-        //cell.avatarTable.kf.setImage(with: url)
+        //DispatchQueue.global().async {
+        //let dataUrl = try? Data(contentsOf: user.avatar)
+        //    DispatchQueue.main.async {
+        //cell.avatarTable.image = UIImage(data: dataUrl!)
+        //}
+        //}
+        let urlImage = user.avatar
+        let url = URL(string: "\(urlImage)")
+        cell.avatarTable.kf.setImage(with: url)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        myTableView.beginUpdates()
-        myTableView.endUpdates()
-           return UITableView.automaticDimension
+        // TableView.automaticDimension
+        return 130
+        
        }
     
     func oneRequest () {
